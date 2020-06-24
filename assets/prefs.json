@@ -1,0 +1,7 @@
+{
+  "search_history": {
+    "type": "boolean",
+    "default": true,
+    "title": "是否保存搜索历史"
+  }
+}
