@@ -3,7 +3,7 @@
   "displayName": "磁力lite",
   "version": "1.1.0",
   "uuid": "c5e189dd-add9-4534-9bbf-ef37a6c646f2",
-  "description": "matrixzw在wlor0623的基础上进行的修改，主要是对yhg修改了一下，也是作为学习这个软件的语法的第一个实验。不得不说在大佬wolor0623代码里学到了许多。后续可能会增加一些其他的网站，现在也是toptab上面已经完成了。大概花了三天时间学吧。目前发布的应该算粗糙的一个版本。期待后续吧，如果有时间的话（其实是这段时间PDE学不动的原因啊）",
+  "description": "",
   "icon": "/assets/icon.png",
   "prefs": "assets/prefs.json",
   "main": "main.js",
@@ -31,9 +31,10 @@
     "tool"
   ],
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.26.1",
     "cheerio": "^1.0.0-rc.3",
-    "iconv-lite": "^0.6.0",
+    "iconv-lite": "^0.6.3",
+    "jschardet": "^3.0.0",
     "microns": "^1.0.6"
   }
 }

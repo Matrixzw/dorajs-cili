@@ -1,45 +1,46 @@
 /*
-这个模块是控制搜索的，额外的还用量儿topType的模式，但是问题出现在要点击才能显示
-
+输入：携带args参数的跳转
+输出：其实这个页面仅仅控制了搜索结果页面上面的tab，顺便处理了一下历史记录数据存储。
+转向：seach_histroy就是显示历史记录的地方。还有两个items主要内容，list。
+备注：2022-1-25将这个过程紧凑成了用map方式构建的东西
 */
+const const_data = require("../script/const_data");
+
 
 module.exports = {
   type: 'topTab',
   async fetch({ args }) {
-    this.title = '搜索' + args.keyword; //args.keyword就是代表的搜索输入关键字
+    this.title = args.keyword;
 
-    keyword = args.keyword
-    console.log(keyword)
-    if(keyword==null||undefined){
-      $ui.toast('关键字为空')
-      return []
-    }
-    //
-    let openSearchHistory = $prefs.get('search_history'); //$prefs为全局api，读取配置项（prefs）中的值，其实只是一个布尔值
-    if (openSearchHistory) { //如果是true
-      let historyKeyword = [];
-      if ($storage.get('historyKeyword')) { //$storage也是全局api，获取key的值
-        historyKeyword = $storage.get('historyKeyword').split(",");
-      };
-      if (historyKeyword.indexOf(keyword) === -1) { //返回数组的位置，没有找到返回-1。之前没有搜索过就添加紧historyKeyword里面
-        historyKeyword.push(keyword)
-        $storage.put('historyKeyword', historyKeyword.splice(-30, 30).join(",")) //相当于保留后面的10条数据，但是我没有明白，什么意思
+
+    let set_open = $prefs.get('search');
+
+    if (set_open) {
+      if ($storage.get(args.keyword)) {
+        $storage.put(args.keyword, $storage.get(args.keyword) + 1)
+      } else {
+        $storage.put(args.keyword, 1)
       }
     };
+
+
+    var data = const_data.index_panel
+
+    var items =[];
+
+    data.map(item => {
+      items.push({
+        title: item.title,
+        route: $route('searcha', { keyword: args.keyword, website: item.website })
+      })
+    })
+
   
-    items = [{
-      title: '雨花阁',
-      route: $route('searcha', {keyword: args.keyword})
-    },
-    {
-      title: '磁力狗',
-      route: $route('searcha_2', {keyword: args.keyword})
-    }].reverse();
-    
+
     return {
       tabMode: 'fixed',
       items: items
     }
 
   }
-};
+}
