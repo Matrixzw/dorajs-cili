@@ -6,9 +6,9 @@ module.exports = {
   actions: [{
     title: '历史记录',
     route: $route('search_history')//跳转到历史记录里面，会展示历史搜索数据。这个是在上方显示的内容，actions
-  },{
+  }, {
     title: '退出程序',
-    onClick: async function(){
+    onClick: async function () {
       this.finish()
     }
   }], //是一个 Action 数组，设置后会在界面顶部显示菜单项，名称就是title
@@ -18,7 +18,7 @@ module.exports = {
   async fetch() {
 
     // iu
-    
+
 
     return [
       {
@@ -26,7 +26,7 @@ module.exports = {
       },
       {
         title: ''
-      },    
+      },
       {
         title: '历史记录',
         image: $icon('history'),
@@ -41,15 +41,16 @@ module.exports = {
         image: $icon('search', 'yellow'),
         spanCount: 6,
         onClick: async () => {
-          let keyword= await $input.prompt({
+          let keyword = await $input.prompt({
             title: '输入搜索内容',
-          // hint: 'name',
+            // hint: 'name',
             value: ''
           });
           //console.log(keyword)
-          if(keyword){//如果输入不是空集的话
-          $router.to($route('search',{keyword: keyword.trim()}))//用strim防止他出现空格回车
-        }}
+          if (keyword) {//如果输入不是空集的话
+            $router.to($route('search', { keyword: keyword.trim() }))//用strim防止他出现空格回车
+          }
+        }
       },
     ]
   }
